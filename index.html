@@ -117,21 +117,6 @@ const data = await d3.csv('https://raw.githubusercontent.com/jpslane/narrative-v
           .attr("dy", ".75em")
           .attr("transform", "rotate(-90)")
           .text("Eastern Oyster Landings (Metric Tons)");
-     
-     svg.append("text")
-    .attr("class", "x label")
-    .attr("text-anchor", "end")
-    .attr("x", (width)/2)
-    .attr("y", height)
-    .text("year");
-    
-    svg.append("text")
-    .attr("class", "y label")
-    .attr("text-anchor", "end")
-    .attr("y", 6)
-    .attr("dy", ".75em")
-    .attr("transform", "rotate(-90)")
-    .text("mean pH");
 }
 </script>
 <button onclick="window.location.href='https://jpslane.github.io/acidification/';">
