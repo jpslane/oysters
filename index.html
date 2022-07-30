@@ -1,46 +1,54 @@
 <html>
+  <H2>
+    <center>
+      Eastern Oyster Landings in the United States from 1950 to 2020
+    </center>
+  </H2>
   <script src='https://d3js.org/d3.v5.min.js'></script>
   <div id="my_dataviz"></div>
+
   <body onload='init()'>
-  <H2>
-   <center>
-      Eastern Oyster Landings in the United States from 1950 to 2020
-   </center
- </H2>
- <script>
-async function init() {
-// set the dimensions and margins of the graph
-var margin = {top: 10, right: 30, bottom: 30, left: 100},
-    width = 1000 - margin.left - margin.right,
-    height = 700 - margin.top - margin.bottom;
+    <script>
+      async function init() {
+        // set the dimensions and margins of the graph
+        var margin = {
+            top: 10,
+            right: 30,
+            bottom: 50,
+            left: 100
+          },
+          width = 1000 - margin.left - margin.right,
+          height = 700 - margin.top - margin.bottom;
 
-// append the svg object to the body of the page
-var svg = d3.select("#my_dataviz")
-  .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform",
-          "translate(" + margin.left + "," + margin.top + ")");
+        // append the svg object to the body of the page
+        var svg = d3.select("#my_dataviz")
+          .append("svg")
+          .attr("width", width + margin.left + margin.right)
+          .attr("height", height + margin.top + margin.bottom)
+          .append("g")
+          .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")");
 
-//Read the data
-const data = await d3.csv('https://raw.githubusercontent.com/jpslane/narrative-visualization/main/eastern-oyster-population.csv');
+        //Read the data
+        const data = await d3.csv('https://raw.githubusercontent.com/jpslane/narrative-visualization/main/eastern-oyster-population.csv');
 
-    var x = d3.scaleLinear()
-      .domain([1950, 2020])
-      .range([0, height]);
-    svg.append("g")
-      .attr('transform', 'translate('+0+','+(height + margin.top)+')')
-      .call(d3.axisBottom(x));
-      
-    // Add Y axis
-    var y = d3.scaleLinear()
-      .domain(0, d3.max(data, function(d) { return +d.       value; })])
-      .range([ height, 0 ]);
-    svg.append("g")
-      .attr('transform', 'translate('+0+','+margin.top       +')')
-      .call(d3.axisLeft(y));
-      
+        var x = d3.scaleLinear()
+          .domain([1950, 2020])
+          .range([0, height]);
+        svg.append("g")
+          .attr('transform', 'translate(' + 0 + ',' + (height + margin.top) + ')')
+          .call(d3.axisBottom(x));
+
+        // Add Y axis
+        var y = d3.scaleLinear()
+          .domain([0, d3.max(data, function(d) {
+            return +d.value;
+          })])
+          .range([height, 0]);
+        svg.append("g")
+          .attr('transform', 'translate(' + 0 + ',' + margin.top + ')')
+          .call(d3.axisLeft(y));
+
 
         var bisect = d3.bisector(function(d) {
           return d.year;
@@ -118,14 +126,15 @@ const data = await d3.csv('https://raw.githubusercontent.com/jpslane/narrative-v
           .attr("class", "y label")
           .attr("text-anchor", "end")
           .attr("x", -270)
-          .attr("y", -100)
+          .attr("y", -70)
           .attr("dy", ".75em")
           .attr("transform", "rotate(-90)")
-          .text("Eastern Oyster Landings (Metric Tons)");
-}
-</script>
-<button onclick="window.location.href='https://jpslane.github.io/acidification/';">
+          .text("Eastern Oyster Landings (Tons)");
+      }
+
+    </script>
+    <button onclick="window.location.href='https://jpslane.github.io/acidification/';">
       Prev
     </button>
-</body>
+  </body>
 </html>
