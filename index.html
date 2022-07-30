@@ -19,10 +19,10 @@ var svg = d3.select("#my_dataviz")
           "translate(" + margin.left + "," + margin.top + ")");
 
 //Read the data
-const data = await d3.csv('https://raw.githubusercontent.com/jpslane/narrative-visualization/main/yearly-mean-surface-sea-water-pH.csv');
+const data = await d3.csv('https://raw.githubusercontent.com/jpslane/narrative-visualization/main/eastern-oyster-population.csv');
 
     var x = d3.scaleLinear()
-      .domain([1985, 2020])
+      .domain([1950, 2020])
       .range([0, height]);
     svg.append("g")
       .attr('transform', 'translate('+0+','+(height + margin.top)+')')
@@ -30,7 +30,7 @@ const data = await d3.csv('https://raw.githubusercontent.com/jpslane/narrative-v
       
     // Add Y axis
     var y = d3.scaleLinear()
-      .domain([8, d3.max(data, function(d) { return +d.       value; })])
+      .domain(0, d3.max(data, function(d) { return +d.       value; })])
       .range([ height, 0 ]);
     svg.append("g")
       .attr('transform', 'translate('+0+','+margin.top       +')')
@@ -92,7 +92,7 @@ const data = await d3.csv('https://raw.githubusercontent.com/jpslane/narrative-v
             .attr('cx', x(selectedData.year))
             .attr('cy', y(selectedData.value))
           focusText
-            .html('Year: ' + selectedData.year + ', ' + 'CO2: ' + selectedData.value)
+            .html('Year: ' + selectedData.year + ', ' + 'Landings: ' + selectedData.value)
             .attr('x', x(selectedData.year) + 15)
             .attr('y', y(selectedData.value))
         }
@@ -116,7 +116,7 @@ const data = await d3.csv('https://raw.githubusercontent.com/jpslane/narrative-v
           .attr("y", -100)
           .attr("dy", ".75em")
           .attr("transform", "rotate(-90)")
-          .text("Mean pH");
+          .text("Eastern Oyster Landings (Metric Tons)");
      
      svg.append("text")
     .attr("class", "x label")
